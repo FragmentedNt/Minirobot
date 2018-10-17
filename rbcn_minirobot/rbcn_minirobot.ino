@@ -32,9 +32,9 @@ void setup()
 	TCCR2B = (TCCR2B & 0b11111000) | 0x02;
 	TM0.init();
 	MD0.init(5, 6, true);
-	MD1.init(9, 10, true, true);
+	MD1.init(9, 10, true);
 	MD2.init(3, 11, true);
-	MD3.init(20, 21, true, false, false);
+	MD3.init(19, 18, true, false, false);
 
 }
 
