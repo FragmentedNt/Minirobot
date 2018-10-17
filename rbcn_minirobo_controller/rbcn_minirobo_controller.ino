@@ -41,14 +41,14 @@ void loop()
 {
 	blinkLED();
 
-	Controller.d2(digitalRead(2));
-	Controller.d3(digitalRead(3));
-	Controller.d4(digitalRead(4));
-	Controller.d5(digitalRead(5));
-	Controller.d6(digitalRead(6));
-	Controller.d7(digitalRead(7));
-	Controller.d8(digitalRead(8));
-	Controller.d9(digitalRead(9));
+	Controller.d2(!digitalRead(2));
+	Controller.d3(!digitalRead(3));
+	Controller.d4(!digitalRead(4));
+	Controller.d5(!digitalRead(5));
+	Controller.d6(!digitalRead(6));
+	Controller.d7(!digitalRead(7));
+	Controller.d8(!digitalRead(8));
+	Controller.d9(!digitalRead(9));
 
 	Controller.sendConData();
 	TM0.Delay(9);
