@@ -28,7 +28,5 @@ class MotorDriverTA8428KClass
 	void set(short power, byte brake);
 };
 
-extern MotorDriverTA8428KClass MD0, MD1, MD2;
-
 #endif
 

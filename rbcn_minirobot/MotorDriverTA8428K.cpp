@@ -120,5 +120,3 @@ void MotorDriverTA8428KClass::set(short power, byte brake)
 	set(power);
 }
 
-MotorDriverTA8428KClass MD0, MD1, MD2;
-
