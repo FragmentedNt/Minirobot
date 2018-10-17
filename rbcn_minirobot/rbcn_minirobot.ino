@@ -8,9 +8,14 @@
 
 // Define User Types below here or use a .h file
 //
+#include "Controller.h"
 #include "TM0.h"
 #include "MotorDriverTA8428K.h"
 
+#define SW_UP 14
+#define SW_DOWN 15
+#define SW_OPEN 16
+#define SW_CLOSE 17
 
 // Define Function Prototypes that use User Types below here or use a .h file
 //
@@ -26,7 +31,14 @@ MotorDriverTA8428KClass MD0, MD1, MD2, MD3;
 void setup()
 {
 	Serial.begin(115200);
+
+	pinMode(SW_UP, INPUT_PULLUP);
+	pinMode(SW_DOWN, INPUT_PULLUP);
+	pinMode(SW_OPEN, INPUT_PULLUP);
+	pinMode(SW_CLOSE, INPUT_PULLUP);
+
 	pinMode(13, OUTPUT);
+
 	TCCR0B = (TCCR0B & 0b11111000) | 0x02;
 	TCCR1B = (TCCR1B & 0b11111000) | 0x02;
 	TCCR2B = (TCCR2B & 0b11111000) | 0x02;
@@ -42,10 +54,52 @@ void setup()
 void loop()
 {
 	blinkLED();
+	Controller.receiveConData();
+
+	if (Controller.leftForward())
+		MD0.set(100);
+	else if (Controller.leftBack())
+		MD0.set(-100);
+
+	if (Controller.rightForward())
+		MD1.set(100);
+	if (Controller.rightBack())
+		MD1.set(-100);
+
+	if (Controller.up())
+	{
+		if (digitalRead(SW_UP))
+			MD2.set(100);
+		else
+			MD2.set(0);
+	}
+	if (Controller.down())
+	{
+		if (digitalRead(SW_DOWN))
+			MD2.set(-100);
+		else
+			MD2.set(0);
+	}
+
+	if (Controller.open())
+	{
+		if (digitalRead(SW_OPEN))
+			MD3.set(100);
+		else
+			MD3.set(0);
+	}
+	if (Controller.close())
+	{
+		if (digitalRead(SW_CLOSE))
+			MD3.set(-100);
+		else
+			MD3.set(0);
+	}
+
 
 	TM0.Delay(9);
 	//printTimeSpan();
-	demo();
+	//demo();
 }
 
 
