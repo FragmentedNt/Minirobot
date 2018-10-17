@@ -66,7 +66,7 @@ void loop()
 
 	if (Controller.rightForward())
 		MD1.set(100);
-	if (Controller.rightBack())
+	else if (Controller.rightBack())
 		MD1.set(-100);
 	else
 		MD1.set(0);
