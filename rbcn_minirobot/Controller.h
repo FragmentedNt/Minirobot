@@ -54,6 +54,7 @@ class ControllerClass
 	 void init(HardwareSerial& hs);
 	 bool receiveConData();
 	 void sendConData();
+	 void debug();
 
 	 bool leftForward()		{ return con.btn.leftForward; }
 	 bool leftBack()		{ return con.btn.leftBack; }
@@ -72,6 +73,8 @@ class ControllerClass
 	 void d7(int d) { con.sw.d7 = d; }
 	 void d8(int d) { con.sw.d8 = d; }
 	 void d9(int d) { con.sw.d9 = d; }
+
+	 bool Error() { return error; }
 
 };
 
