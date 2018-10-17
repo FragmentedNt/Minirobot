@@ -49,7 +49,6 @@ void setup()
 	MD1.init(9, 10, true);
 	MD2.init(3, 11, true);
 	MD3.init(19, 18, true, false, false);
-
 }
 
 // Add the main program code into the continuous loop() function
@@ -62,11 +61,15 @@ void loop()
 		MD0.set(100);
 	else if (Controller.leftBack())
 		MD0.set(-100);
+	else
+		MD0.set(0);
 
 	if (Controller.rightForward())
 		MD1.set(100);
 	if (Controller.rightBack())
 		MD1.set(-100);
+	else
+		MD1.set(0);
 
 	if (Controller.up())
 	{
@@ -75,12 +78,16 @@ void loop()
 		else
 			MD2.set(0);
 	}
-	if (Controller.down())
+	else if (Controller.down())
 	{
 		if (digitalRead(SW_DOWN))
 			MD2.set(-100);
 		else
 			MD2.set(0);
+	}
+	else
+	{
+		MD2.set(0);
 	}
 
 	if (Controller.open())
@@ -90,18 +97,27 @@ void loop()
 		else
 			MD3.set(0);
 	}
-	if (Controller.close())
+	else if (Controller.close())
 	{
 		if (digitalRead(SW_CLOSE))
 			MD3.set(-100);
 		else
 			MD3.set(0);
 	}
+	else
+	{
+		MD3.set(0);
+	}
 
 
 	TM0.Delay(9);
 	//printTimeSpan();
 	//demo();
+
+	if (Controller.Error())
+		Serial.println("Error");
+	else
+		Controller.debug();
 }
 
 
