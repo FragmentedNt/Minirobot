@@ -32,6 +32,8 @@ void setup()
 {
 	Serial.begin(115200);
 
+	Controller.init(Serial);
+
 	pinMode(SW_UP, INPUT_PULLUP);
 	pinMode(SW_DOWN, INPUT_PULLUP);
 	pinMode(SW_OPEN, INPUT_PULLUP);
