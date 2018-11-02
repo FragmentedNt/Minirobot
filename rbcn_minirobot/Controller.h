@@ -31,14 +31,14 @@ class ControllerClass
 			byte close : 1;
 		}btn;
 		struct {
-			byte d2 : 1;
-			byte d3 : 1;
-			byte d4 : 1;
-			byte d5 : 1;
 			byte d6 : 1;
 			byte d7 : 1;
 			byte d8 : 1;
 			byte d9 : 1;
+			byte d3 : 1;
+			byte d2 : 1;
+			byte d4 : 1;
+			byte d5 : 1;
 		}sw;
 		void clear()
 		{
@@ -64,6 +64,9 @@ class ControllerClass
 	 bool down()	{ return con.btn.down; }
 	 bool open()	{ return con.btn.open; }
 	 bool close()	{ return con.btn.close; }
+
+	 bool rise_open() { return con.btn.open && !conOld.btn.open; }
+	 bool rise_close() { return con.btn.close && !conOld.btn.close; }
 	 
 	 void d2(int d) { con.sw.d2 = d; }
 	 void d3(int d) { con.sw.d3 = d; }

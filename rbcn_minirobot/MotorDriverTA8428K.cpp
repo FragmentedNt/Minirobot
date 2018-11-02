@@ -5,7 +5,7 @@
 #include "MotorDriverTA8428K.h"
 
 
-void MotorDriverTA8428KClass::init(byte pinA, byte pinB, bool brake = false, bool inverse = false, bool pwm_enable = true)
+void MotorDriverTA8428KClass::init(byte pinA, byte pinB, bool brake = false, bool inverse = false, bool hardwarePWM = true)
 {
 	this->pinA = pinA;
 	this->pinB = pinB;
@@ -13,9 +13,13 @@ void MotorDriverTA8428KClass::init(byte pinA, byte pinB, bool brake = false, boo
 	pinMode(pinB, OUTPUT);
 	this->brake = brake;
 	this->inverse = inverse;
-	this->pwm = pwm_enable;
+	this->hardwarePWM = hardwarePWM;
+
+	cycle = 20;
+	now = 0;
+
 	prev_power = 0;
-	if (pwm)
+	if (hardwarePWM)
 	{
 		analogWrite(pinA, 0);
 		analogWrite(pinB, 0);
@@ -31,13 +35,14 @@ void MotorDriverTA8428KClass::init(byte pinA, byte pinB, bool brake = false, boo
 
 void MotorDriverTA8428KClass::set(short power)
 {
+
 	if (inverse)
 		power *= -1;
 	
 	if (prev_power != power)
 	{
 		prev_power = power;
-		if (pwm)
+		if (hardwarePWM)
 		{
 			analogWrite(pinA, 0);
 			analogWrite(pinB, 0);
@@ -53,36 +58,53 @@ void MotorDriverTA8428KClass::set(short power)
 	if (power > 0)
 	{
 		if (power > 255)	power = 255;
-		if (pwm)
+		if (hardwarePWM)
 		{
 			analogWrite(pinA, power);
 			analogWrite(pinB, 0);
 		}
 		else
 		{
-			digitalWrite(pinA, HIGH);
-			digitalWrite(pinB, LOW);
+			//if (now / cycle < power / 255)F®”Œ^‚È‚Ì‚Å‚±‚ê‚Í‚Ü‚¸‚¢C‚Æ‚¢‚¤‚±‚Æ‚Å‰º‚ÉŽ®•ÏŒ`
+			if (now * 255 < cycle * power)
+			{
+				digitalWrite(pinA, HIGH);
+				digitalWrite(pinB, LOW);
+			}
+			else
+			{
+				digitalWrite(pinA, LOW);
+				digitalWrite(pinB, LOW);
+			}
 		}
 	}
 	else if (power < 0)
 	{
 		if (power < -255)	power = -255;
-		if (pwm)
+		if (hardwarePWM)
 		{
 			analogWrite(pinA, 0);
 			analogWrite(pinB, -power);
 		}
 		else
 		{
-			digitalWrite(pinA, LOW);
-			digitalWrite(pinB, HIGH);
+			if (now * 255 < cycle * -power)
+			{
+				digitalWrite(pinA, LOW);
+				digitalWrite(pinB, HIGH);
+			}
+			else
+			{
+				digitalWrite(pinA, LOW);
+				digitalWrite(pinB, LOW);
+			}
 		}
 	}
 	else
 	{
 		if (brake)
 		{
-			if (pwm)
+			if (hardwarePWM)
 			{
 				analogWrite(pinA, 255);
 				analogWrite(pinB, 255);
@@ -95,7 +117,7 @@ void MotorDriverTA8428KClass::set(short power)
 		}
 		else 
 		{
-			if (pwm)
+			if (hardwarePWM)
 			{
 				analogWrite(pinA, 0);
 				analogWrite(pinB, 0);
@@ -107,6 +129,10 @@ void MotorDriverTA8428KClass::set(short power)
 			}
 		}
 	}
+
+	now++;
+	if (now > cycle)
+		now = 0;
 }
 
 /// <summary>

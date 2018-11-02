@@ -17,13 +17,17 @@ class MotorDriverTA8428KClass
 	 byte pinA, pinB;
 	 bool brake;
 	 bool inverse;
-	 bool pwm;
+	 bool hardwarePWM;
 	 short prev_power;
+
+	 // software pwm
+	 short cycle;
+	 short now;
  protected:
 
 
  public:
-	void init(byte pinA, byte pinB, bool brake = false, bool inverse = false, bool pwm_enable = true);
+	void init(byte pinA, byte pinB, bool brake = false, bool inverse = false, bool hardwarePWM = true);
 	void set(short power);
 	void set(short power, byte brake);
 };
