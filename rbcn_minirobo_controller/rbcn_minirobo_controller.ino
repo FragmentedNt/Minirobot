@@ -1,11 +1,3 @@
-// Visual Micro is in vMicro>General>Tutorial Mode
-// 
-/*
-    Name:       rbcn_minirobo_controller.ino
-    Created:	2018/10/17 23:01:48
-    Author:     DESKTOP-IQIF1R0\USR-xx
-*/
-
 // Define User Types below here or use a .h file
 //
 #include "Controller.h"
@@ -69,7 +61,7 @@ void blinkLED()
 	if (mi - ms > 500)
 	{
 		ms = mi;
-		PINB |= _BV(5);	// Arduino nano‚ÌPB5(D13”Ô)‚ÉÚ‘±‚³‚ê‚Ä‚¢‚éLED‚ð‘€ì
-						// AVR‚ÌŽd—l‚ÅPINx‚É‘‚«ž‚Þ‚Æo—Í‚ª”½“]‚·‚é(’Êí‚Ìo—ÍƒŒƒWƒXƒ^‚ÍPORTx)
+		PINB |= _BV(5);	// Arduino nanoï¿½ï¿½PB5(D13ï¿½ï¿½)ï¿½ÉÚ‘ï¿½ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½LEDï¿½ð‘€ï¿½
+						// AVRï¿½ÌŽdï¿½lï¿½ï¿½PINxï¿½Éï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ‚Æoï¿½Í‚ï¿½ï¿½ï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½(ï¿½Êï¿½Ìoï¿½Íƒï¿½ï¿½Wï¿½Xï¿½^ï¿½ï¿½PORTx)
 	}
 }

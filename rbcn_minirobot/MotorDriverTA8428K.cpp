@@ -65,7 +65,7 @@ void MotorDriverTA8428KClass::set(short power)
 		}
 		else
 		{
-			//if (now / cycle < power / 255)F®”Œ^‚È‚Ì‚Å‚±‚ê‚Í‚Ü‚¸‚¢C‚Æ‚¢‚¤‚±‚Æ‚Å‰º‚ÉŽ®•ÏŒ`
+			//if (now / cycle < power / 255)ï¿½Fï¿½ï¿½ï¿½ï¿½ï¿½^ï¿½È‚Ì‚Å‚ï¿½ï¿½ï¿½Í‚Ü‚ï¿½ï¿½ï¿½ï¿½Cï¿½Æ‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚Å‰ï¿½ï¿½ÉŽï¿½ï¿½ÏŒ`
 			if (now * 255 < cycle * power)
 			{
 				digitalWrite(pinA, HIGH);
@@ -140,7 +140,7 @@ void MotorDriverTA8428KClass::set(short power)
 /// </summary>
 /// <param name="power"></param>
 /// <param name="brake"></param>
-void MotorDriverTA8428KClass::set(short power, byte brake)
+void MotorDriverTA8428KClass::set(short power, bool brake)
 {
 	this->brake = brake;
 	set(power);

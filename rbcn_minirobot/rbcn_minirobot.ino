@@ -1,11 +1,3 @@
-﻿// Visual Micro is in vMicro>General>Tutorial Mode
-// 
-/*
-    Name:       rbcn_minirobot.ino
-    Created:	2018/10/17 19:39:43
-    Author:     DESKTOP-IQIF1R0\USR-xx
-*/
-
 // Define User Types below here or use a .h file
 //
 #include "Controller.h"
